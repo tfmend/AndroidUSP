@@ -4,8 +4,9 @@
         android:title="@string/menu_filter"
         android:orderInCategory="1"
         android:showAsAction="always" 
-        android:icon="@drawable/ic_action_filter" 
         android:text="Filtrar"
+        
+        android:icon="@drawable/ic_action_filter"  
     />
-
+    
 </menu>
