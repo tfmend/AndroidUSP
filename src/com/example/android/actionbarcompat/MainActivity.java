@@ -1,8 +1,10 @@
 package com.example.android.actionbarcompat;
 
 import com.google.android.maps.MapView;
+import com.google.android.maps.MyLocationOverlay;
 
 import android.content.Context;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -11,11 +13,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 // import android.widget.Toast;
+import android.widget.Toast;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements LocationListener{
 
 	private MapView mapView;
+	private String provider;
+	private LocationManager locationManager;
+	private MyLocationOverlay myLocationOverlay;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,39 +31,26 @@ public class MainActivity extends ActionBarActivity {
 		mapView.setBuiltInZoomControls(true);
 
 		setUserLocationListener();
+		setUserLocationOverlay();
 	}
 
-	private void setUserLocationListener() {
-		// Acquire a reference to the system Location Manager
-		LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+	private void setUserLocationOverlay() {
+		myLocationOverlay = new MyLocationOverlay(this, mapView);
+		mapView.getOverlays().add(myLocationOverlay);
 
-		// Define a listener that responds to location updates
-		LocationListener locationListener = new LocationListener() {
-			public void onLocationChanged(Location location) {
-				// Called when a new location is found by the network location provider.
-				setUserMarker(location);
-			}
+		myLocationOverlay.runOnFirstFix(new Runnable() {
+			public void run() {
+				mapView.getController().animateTo(
+				  myLocationOverlay.getMyLocation());
+			 	}
+		});
+		
+	}
 
-			private void setUserMarker(Location location) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			public void onStatusChanged(String provider, int status, Bundle extras) {
-
-			}
-
-			public void onProviderEnabled(String provider) {
-
-			}
-
-			public void onProviderDisabled(String provider) {
-
-			}
-		};
-
-		// Register the listener with the Location Manager to receive location updates
-		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+	private void setUserLocationListener() {	
+		locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		Criteria criteria = new Criteria();
+		provider = locationManager.getBestProvider(criteria, false);
 	}
 
 	@Override
@@ -72,8 +65,6 @@ public class MainActivity extends ActionBarActivity {
 		switch (item.getItemId()) {
 
 		case R.id.menu_filter:
-			//Toast.makeText(this, "Tapped", Toast.LENGTH_SHORT).show();
-						
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -82,5 +73,47 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected boolean isRouteDisplayed() {
 		return false;
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		locationManager.requestLocationUpdates(provider, 400, 1, this);
+		myLocationOverlay.enableCompass(); 
+		myLocationOverlay.enableMyLocation(); 
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		locationManager.removeUpdates(this);
+		myLocationOverlay.disableCompass(); 
+		myLocationOverlay.disableMyLocation(); 
+	}
+
+	@Override
+	public void onLocationChanged(Location arg0) {
+//		Toast.makeText(this, ""+arg0.getLatitude()+ " "+ arg0.getLongitude(), Toast.LENGTH_SHORT).show();
+
+	}
+
+	@Override
+	public void onProviderDisabled(String arg0) {
+		Toast.makeText(this, "Disabled provider " + provider,
+				Toast.LENGTH_SHORT).show();
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		Toast.makeText(this, "Enabled new provider " + provider,
+				Toast.LENGTH_SHORT).show();
+		
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
 	}
 }
