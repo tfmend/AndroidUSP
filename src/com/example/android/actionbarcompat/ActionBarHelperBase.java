@@ -2,6 +2,7 @@ package com.example.android.actionbarcompat;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
 import com.google.android.maps.MapActivity;
 import android.content.Context;
 import android.content.res.XmlResourceParser;

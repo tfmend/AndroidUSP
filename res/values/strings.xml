@@ -4,5 +4,6 @@
     <string name="menu_filter">Filtrar</string>
     <string name="maps_api_key">0WkvFlTSUx3lOJEBQb2Ghab4ba7CrI2L3PXIMfQ</string>
     <string name="filter_str">Filtrar</string>
+    <string name="show_all">Todos</string>
     
 </resources>

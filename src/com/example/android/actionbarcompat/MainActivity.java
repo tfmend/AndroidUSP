@@ -10,9 +10,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+// import android.widget.Toast;
+
 
 public class MainActivity extends ActionBarActivity {
+
 	private MapView mapView;
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,8 @@ public class MainActivity extends ActionBarActivity {
 		switch (item.getItemId()) {
 
 		case R.id.menu_filter:
-			Toast.makeText(this, "Tapped", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "Tapped", Toast.LENGTH_SHORT).show();
+						
 			break;
 		}
 		return super.onOptionsItemSelected(item);
