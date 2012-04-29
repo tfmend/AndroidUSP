@@ -1,8 +1,5 @@
 package com.example.android.actionbarcompat;
 
-import com.google.android.maps.MapView;
-import com.google.android.maps.MyLocationOverlay;
-
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
@@ -12,8 +9,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-// import android.widget.Toast;
 import android.widget.Toast;
+
+import com.google.android.maps.MapView;
+import com.google.android.maps.MyLocationOverlay;
 
 
 public class MainActivity extends ActionBarActivity implements LocationListener{
@@ -22,6 +21,7 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 	private String provider;
 	private LocationManager locationManager;
 	private MyLocationOverlay myLocationOverlay;
+	private GeneralOverlays myOverlays;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,6 +32,15 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 
 		setUserLocationListener();
 		setUserLocationOverlay();
+		setGeneralOverlays();
+	}
+
+	private void setGeneralOverlays() {
+		setInstituteOverlays();		
+	}
+
+	private void setInstituteOverlays() {
+		// read xml to create overlays...
 	}
 
 	private void setUserLocationOverlay() {
