@@ -10,16 +10,16 @@ import android.widget.Toast;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
 
-public class GeneralOverlays extends ItemizedOverlay<OverlayItem> {
+public class MyOverlays extends ItemizedOverlay<OverlayItem> {
 
-	private static int maxNum = 5;
+	private static int maxNum = 100;
 	private OverlayItem overlays[] = new OverlayItem[maxNum];
 	private int index = 0;
 	private boolean full = false;
 	private Context context;
 	private OverlayItem previousoverlay;
 
-	public GeneralOverlays(Context context, Drawable defaultMarker) {
+	public MyOverlays(Context context, Drawable defaultMarker) {
 		super(boundCenterBottom(defaultMarker));
 		this.context = context;
 	}

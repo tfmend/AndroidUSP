@@ -1,50 +1,50 @@
-42,1,Faculdade de Odontologia,FO,-23.567645,-46.738921,
-43,1,Faculdade de Medicina,FM,-23.566642,-46.741487,
-44,1,"Fonoaudiologia, Fisioterapia e Terapia Ocupacional",FOFITO,-23.566977,-46.741058,
-45,1,Faculdade de Medicina Veterinária e Zootecnia,FMVZ,-23.569696,-46.739719,
-46,1,Instituto de Biociências,"ICB I, II e IV",-23.567606,-46.73226,
-47,1,Instituto de Biologia,IB,-23.565954,-46.730222,
-50,1,Instituto de Geociências,IG,-23.561745,-46.727389,
-51,1,Instituto de Química,IQ,-23.564617,-46.72608,
-52,1,Faculdade de Ciências Farmacêuticas,FCF,-23.563653,-46.725179,
-53,1,"Faculdade de Filosofia, Letras e Ciências Humanas",FFLCH,-23.56261,-46.724789,
-57,1,Centro de Computação Eletrônica,CCE,-23.557319,-46.731919,diferencas...
-65,1,Biblioteca da ECA,,-23.558251,-46.727027,
-66,1,Editora da Universidade de São Paulo,EDUSP,-23.557516,-46.727338,
-67,1,Biblioteca da Escola Politécnica,,-23.557241,-46.730177,
-68,1,"Depto. de Engenharia de Computação e Sistemas Digitais, Escola Politécnica",PCS,-23.557585,-46.730514,
-2,2,Centros de Visitantes,,-23.563967,-46.713247,
-6,2,Centro de Práticas Esportivas,CEPEUSP,-23.560073,-46.716862,
-8,2,Museu de Arte Contemporânea,MAC,-23.560516,-46.722274,
-13,2,CINUSP Paulo Emílio,CINUSP,-23.558534,-46.721443,
-24,2,Raia Olímpica,CEPEUSP,-23.556533,-46.722077,
-34,2,Clube dos Funcionários,,-23.558972,-46.736208,
-38,2,Museu de Arqueologia e Etnologia,MAE,-23.559326,-46.741358,
-39,2,Grêmio dos Funcionários da PCO,,-23.559778,-46.743418,
-48,2,Clube dos Professores,,-23.562276,-46.731938,
-54,2,Casa da Cultura Japonesa,,-23.563225,-46.720198,
-55,2,Núcleo de Recreação Infantil,NURI,-23.560211,-46.71963,
-56,2,Anfiteatro Camargo Guarnieri,,-23.558082,-46.71993,
-60,2,Paço das Artes,,-23.564203,-46.715209,
-61,2,Rádio USP,,-23.558106,-46.725649,
-1,3,Fundação Universitária para o Vestibular,FUVEST,-23.564892,-46.71239,
-7,3,Coordenadoria de Administração Geral,CODAGE,-23.56114,-46.722489,
-10,3,Coordenadoria de Assistência Social,COSEAS,-23.559178,-46.721571,
-11,3,O Programa de Pós-Graduação em Integração da América Latina,PROLAM,-23.558406,-46.721105,
-12,3,Programa de Pós-Graduação em Ciência Ambiental,PROCAM,-23.558731,-46.72133,
-16,3,Reitoria,,-23.558962,-46.726411,
-17,3,Coordenadoria de Comunicação Social,CCS,-23.558529,-46.725778,
-18,3,Editora da Universidade de São Paulo,EDUSP,-23.562124,-46.722526,
-19,3,Agência USP de Inovação,,-23.558834,-46.7261,
-37,3,Prefeitura do Campus da Capital,PCO,-23.558952,-46.740435,
-49,3,Administração da FFLCH,,-23.56145,-46.729385,
-59,3,Fundação Universitária para o Vestibular,FUVEST,-23.558814,-46.725284,
-15,4,Praça do relógio,,-23.559611,-46.724212,
-25,4,Praça dos Bancos,,-23.559999,-46.727367,
-58,4,Praça da Reitoria,,-23.561342,-46.720439,
-69,4,Praça Ramos de Azevedo,,-23.556995,-46.734383,
-70,4,Praça do oceanográfico,,-23.56025,-46.731647,
-9,5,Conjunto Residencial da USP,CRUSP,-23.559778,-46.721874,
-27,5,Barracão,ECA,-23.556075,-46.728454,
-28,5,Barracão,FMVZ,-23.556518,-46.728373,
-40,5,Hospital Universitário,HU,-23.564774,-46.740607,
+42;1;Faculdade de Odontologia;FO;-23.567645;-46.738921;
+43;1;Faculdade de Medicina;FM;-23.566642;-46.741487;
+44;1;Fonoaudiologia, Fisioterapia e Terapia Ocupacional;FOFITO;-23.566977;-46.741058;
+45;1;Faculdade de Medicina Veterinária e Zootecnia;FMVZ;-23.569696;-46.739719;
+46;1;Instituto de Biociências;ICB I II e IV;-23.567606;-46.73226;
+47;1;Instituto de Biologia;IB;-23.565954;-46.730222;
+50;1;Instituto de Geociências;IG;-23.561745;-46.727389;
+51;1;Instituto de Química;IQ;-23.564617;-46.72608;
+52;1;Faculdade de Ciências Farmacêuticas;FCF;-23.563653;-46.725179;
+53;1;Faculdade de Filosofia, Letras e Ciências Humanas;FFLCH;-23.56261;-46.724789;
+57;1;Centro de Computação Eletrônica;CCE;-23.557319;-46.731919;
+65;1;Biblioteca da ECA;;-23.558251;-46.727027;
+66;1;Editora da Universidade de São Paulo;EDUSP;-23.557516;-46.727338;
+67;1;Biblioteca da Escola Politécnica;;-23.557241;-46.730177;
+68;1;Depto. de Engenharia de Computação e Sistemas Digitais, Escola Politécnica;PCS;-23.557585;-46.730514;
+2;2;Centros de Visitantes;;-23.563967;-46.713247;
+6;2;Centro de Práticas Esportivas;CEPEUSP;-23.560073;-46.716862;
+8;2;Museu de Arte Contemporânea;MAC;-23.560516;-46.722274;
+13;2;CINUSP Paulo Emílio;CINUSP;-23.558534;-46.721443;
+24;2;Raia Olímpica;CEPEUSP;-23.556533;-46.722077;
+34;2;Clube dos Funcionários;;-23.558972;-46.736208;
+38;2;Museu de Arqueologia e Etnologia;MAE;-23.559326;-46.741358;
+39;2;Grêmio dos Funcionários da PCO;;-23.559778;-46.743418;
+48;2;Clube dos Professores;;-23.562276;-46.731938;
+54;2;Casa da Cultura Japonesa;;-23.563225;-46.720198;
+55;2;Núcleo de Recreação Infantil;NURI;-23.560211;-46.71963;
+56;2;Anfiteatro Camargo Guarnieri;;-23.558082;-46.71993;
+60;2;Paço das Artes;;-23.564203;-46.715209;
+61;2;Rádio USP;;-23.558106;-46.725649;
+1;3;Fundação Universitária para o Vestibular;FUVEST;-23.564892;-46.71239;
+7;3;Coordenadoria de Administração Geral;CODAGE;-23.56114;-46.722489;
+10;3;Coordenadoria de Assistência Social;COSEAS;-23.559178;-46.721571;
+11;3;Programa de Pós-Graduação em Integração da América Latina;PROLAM;-23.558406;-46.721105;
+12;3;Programa de Pós-Graduação em Ciência Ambiental;PROCAM;-23.558731;-46.72133;
+16;3;Reitoria;;-23.558962;-46.726411;
+17;3;Coordenadoria de Comunicação Social;CCS;-23.558529;-46.725778;
+18;3;Editora da Universidade de São Paulo;EDUSP;-23.562124;-46.722526;
+19;3;Agência USP de Inovação;;-23.558834;-46.7261;
+37;3;Prefeitura do Campus da Capital;PCO;-23.558952;-46.740435;
+49;3;Administração da FFLCH;;-23.56145;-46.729385;
+59;3;Fundação Universitária para o Vestibular;FUVEST;-23.558814;-46.725284;
+15;4;Praça do relógio;;-23.559611;-46.724212;
+25;4;Praça dos Bancos;;-23.559999;-46.727367;
+58;4;Praça da Reitoria;;-23.561342;-46.720439;
+69;4;Praça Ramos de Azevedo;;-23.556995;-46.734383;
+70;4;Praça do Oceanográfico;;-23.56025;-46.731647;
+9;5;Conjunto Residencial da USP;CRUSP;-23.559778;-46.721874;
+27;5;Barracão;ECA;-23.556075;-46.728454;
+28;5;Barracão;FMVZ;-23.556518;-46.728373;
+40;5;Hospital Universitário;HU;-23.564774;-46.740607;
