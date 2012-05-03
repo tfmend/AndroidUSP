@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/db1_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout style="@style/TitleBar" >
+
+        <TextView style="@style/TitleBarText" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="6dip" >
+
+        <Button
+            android:id="@+id/home_btn_feature1"
+            style="@style/HomeButton"
+            android:drawableTop="@drawable/home_button1"
+            android:onClick="onClickFeature"
+            android:text="@string/title_feature1" />
+
+        <Button
+            android:id="@+id/home_btn_feature2"
+            style="@style/HomeButton"
+            android:drawableTop="@drawable/home_button2"
+            android:onClick="onClickFeature"
+            android:text="@string/title_feature2" />
+
+    </LinearLayout>
+
+</LinearLayout>

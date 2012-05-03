@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,7 +21,7 @@ import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.OverlayItem;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MapaDaUSP extends ActionBarActivity {
 
 	private MapView mapView;
 	private LocationManager locationManager;

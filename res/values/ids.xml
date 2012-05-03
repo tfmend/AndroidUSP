@@ -6,5 +6,7 @@
     <item type="id" name="actionbar_compat_item_refresh" />
     <item type="id" name="menu_filter" />
     <item type="id" name="show_all" />
+    <item type="id" name="title_container" />
+    <item type="id" name="title_text" />
 
 </resources>

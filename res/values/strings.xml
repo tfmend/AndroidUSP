@@ -5,5 +5,7 @@
     <string name="maps_api_key">0WkvFlTSUx3lOJEBQb2Ghab4ba7CrI2L3PXIMfQ</string>
     <string name="filter_str">Filtrar</string>
     <string name="show_all">Todos</string>
+    <string name="title_feature1">Mapa da USP</string>
+    <string name="title_feature2">Feature 2</string>
     
 </resources>
