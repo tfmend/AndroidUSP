@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.example.android.actionbarcompat;
+package br.usp.ime.mapa;
 
+import br.ime.usp.mapa.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

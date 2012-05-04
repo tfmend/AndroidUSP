@@ -1,4 +1,4 @@
-package com.example.android.actionbarcompat;
+package br.usp.ime.mapa;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;

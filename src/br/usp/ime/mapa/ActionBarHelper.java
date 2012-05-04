@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.actionbarcompat;
+package br.usp.ime.mapa;
 
 import com.google.android.maps.MapActivity;
 

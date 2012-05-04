@@ -1,4 +1,4 @@
-package com.example.android.actionbarcompat;
+package br.usp.ime.mapa;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import br.ime.usp.mapa.R;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;

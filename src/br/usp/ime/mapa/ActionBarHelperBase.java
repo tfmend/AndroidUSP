@@ -1,7 +1,9 @@
-package com.example.android.actionbarcompat;
+package br.usp.ime.mapa;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import br.ime.usp.mapa.R;
 
 import com.google.android.maps.MapActivity;
 import android.content.Context;
