@@ -16,7 +16,7 @@
 
 package br.usp.ime.uspApp;
 
-import br.ime.usp.mapa.R;
+import br.ime.usp.R;
 import android.os.Bundle;
 
 public class HomeActivity extends DashboardActivity  {
@@ -25,8 +25,8 @@ public class HomeActivity extends DashboardActivity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		
-		this.setTitle(" Aplicações para USP");
-		this.setTitleColor(R.color.actionbar_title_color);
+		//this.setTitle(" Aplicações para USP");
+		//this.setTitleColor(R.color.actionbar_title_color);
 	}
 
 	protected void onDestroy () {

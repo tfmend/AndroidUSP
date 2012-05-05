@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.ime.usp.mapa"
+    package="br.ime.usp"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -10,12 +10,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     
-    <application android:label="@string/app_name"
+    <application android:label="@string/app_name2"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme" >
         <uses-library android:name="com.google.android.maps" />
         
-        <activity android:name="br.usp.ime.mapa.HomeActivity" android:label="@string/app_name">
+        <activity android:name="br.usp.ime.uspApp.HomeActivity" android:label="@string/app_name2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,13 +26,13 @@
             
         </activity>
         
-        <activity android:name=".view.fragments.TestConnectionActivity"></activity>
-        <activity android:name=".view.fragments.BetterRuActivity"></activity>
-        <activity android:name=".view.fragments.BetterTimeActivity"></activity>
-        <activity android:name=".view.fragments.ConfigActivity"></activity>
-        <activity android:name=".view.fragments.SendCommentActivity"></activity>
-        <activity android:name=".view.fragments.ViewCommentsActivity"></activity>
-        <activity android:name=".view.fragments.ViewStatusActivity"></activity>
+        <activity android:name="br.usp.ime.rusp.view.fragments.TestConnectionActivity"></activity>
+        <activity android:name="br.usp.ime.rusp.view.fragments.BetterRuActivity"></activity>
+        <activity android:name="br.usp.ime.rusp.view.fragments.BetterTimeActivity"></activity>
+        <activity android:name="br.usp.ime.rusp.view.fragments.ConfigActivity"></activity>
+        <activity android:name="br.usp.ime.rusp.view.fragments.SendCommentActivity"></activity>
+        <activity android:name="br.usp.ime.rusp.view.fragments.ViewCommentsActivity"></activity>
+        <activity android:name="br.usp.ime.rusp.view.fragments.ViewStatusActivity"></activity>
         
         
         

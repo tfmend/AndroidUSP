@@ -1,6 +1,6 @@
 package br.usp.ime.mapa;
 
-import br.ime.usp.mapa.R;
+import br.ime.usp.R;
 
 import com.google.android.maps.MapActivity;
 

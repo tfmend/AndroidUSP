@@ -1,11 +1,42 @@
 <resources>
+    
+    <string name="app_name2">Aplicações para USP</string>
 
+    <!-- Strings for MapaDaUSP -->
     <string name="app_name">Mapa da USP</string>
     <string name="menu_filter">Filtrar</string>
     <string name="maps_api_key">0WkvFlTSUx3lOJEBQb2Ghab4ba7CrI2L3PXIMfQ</string>
     <string name="filter_str">Filtrar</string>
     <string name="show_all">Todos</string>
     <string name="title_feature1">Mapa da USP</string>
-    <string name="title_feature2">Feature 2</string>
+    <string name="title_feature2">Feature 2</string>   
     
+    
+    <!-- Strings for RUSP -->
+    <string name="app_name1">RUSP</string>
+    <string name="title_better_ru">Melhor Bandejão</string>
+    <string name="title_ru_status">Status Bandejão</string>
+    <string name="title_better_time">Melhor Horário</string>
+    <string name="title_select_ru">Selecionar Bandejão</string>
+    <string name="title_select_meal">Selecionar Refeição</string>
+    <string name="title_send_comment">Enviar Comentário</string>
+    <string name="title_send_get_status">Status dos restaurantes</string>
+    <string name="title_configurations">Configurações</string>
+    <string name="title_comments_view">Visualizar Comentários</string>
+    <string name="title_update">Atualizar</string>
+    <string name="menu_time">Horário</string>
+    <string name="menu_status">Status dos restaurantes</string>
+    <string name="menu_comment">Comentário</string>
+    <string name="menu_ru">Bandejão</string>
+    <string name="title_view_comments">Comentários</string>
+    <string name="button_send_comment">Enviar</string>
+    <string name="send_commen_wait">Enviando comentário ...</string>
+    <string name="get_ru_recommendation_wait">Buscando bandejão ...</string>
+    <string name="get_time_recommendation_wait">Buscando horário ...</string>
+    <string name="get_comment_wait">Buscando comentários ...</string>
+    <string name="message_no_comment_found">Nenhum comentário encontrado.</string>    
+    <string name="config_title_server_address">Servidor</string>
+    <string name="button_save_config">Salvar</string>
+    <string name="button_cancel_config">Cancelar</string>
+
 </resources>
