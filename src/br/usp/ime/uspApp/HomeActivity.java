@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package br.usp.ime.mapa;
+package br.usp.ime.uspApp;
 
 import br.ime.usp.mapa.R;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
-public abstract class DashboardActivity extends Activity 
-{
+public class HomeActivity extends DashboardActivity  {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_home);
+		
+		this.setTitle(" Aplicações para USP");
+		this.setTitleColor(R.color.actionbar_title_color);
 	}
 
 	protected void onDestroy () {
@@ -52,25 +51,6 @@ public abstract class DashboardActivity extends Activity
 
 	protected void onStop () {
 		super.onStop ();
-	}
-
-	public void onClickFeature (View v) {
-		int id = v.getId ();
-		switch (id) {
-		case R.id.home_btn_feature1 :
-			startActivity (new Intent(getApplicationContext(), MapaDaUSP.class));
-			break;
-	/*	case R.id.home_btn_feature2 :
-			//startActivity (new Intent(getApplicationContext(), F2Activity.class));
-			break;*/
-		default: 
-			break;
-		}
-	}
-	
-	public void setTitleFromActivityLabel (int textViewId) {
-		TextView tv = (TextView) findViewById (textViewId);
-		if (tv != null) tv.setText (getTitle ());
 	}
 
 }

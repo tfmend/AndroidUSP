@@ -8,13 +8,14 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    
     <application android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme" >
         <uses-library android:name="com.google.android.maps" />
         
-        <activity android:name=".HomeActivity" android:label="@string/app_name">
+        <activity android:name="br.usp.ime.mapa.HomeActivity" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,6 +25,20 @@
         <activity android:name="br.usp.ime.mapa.MapaDaUSP">
             
         </activity>
-    
-    </application>
+        
+        <activity android:name=".view.fragments.TestConnectionActivity"></activity>
+        <activity android:name=".view.fragments.BetterRuActivity"></activity>
+        <activity android:name=".view.fragments.BetterTimeActivity"></activity>
+        <activity android:name=".view.fragments.ConfigActivity"></activity>
+        <activity android:name=".view.fragments.SendCommentActivity"></activity>
+        <activity android:name=".view.fragments.ViewCommentsActivity"></activity>
+        <activity android:name=".view.fragments.ViewStatusActivity"></activity>
+        
+        
+        
+        
+	</application>    
+        
+        
+     
 </manifest>

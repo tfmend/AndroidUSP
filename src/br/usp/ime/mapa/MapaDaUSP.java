@@ -30,10 +30,10 @@ public class MapaDaUSP extends ActionBarActivity {
 	private MapController mapController;
 	private MyOverlays itemizedoverlay1;
 	private MyOverlays itemizedoverlay2;
-	/*private MyOverlays itemizedoverlay3;
+	private MyOverlays itemizedoverlay3;
 	private MyOverlays itemizedoverlay4;
 	private MyOverlays itemizedoverlay5;
-	private MyOverlays itemizedoverlay6;*/
+	/*private MyOverlays itemizedoverlay6;*/
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,9 +62,39 @@ public class MapaDaUSP extends ActionBarActivity {
 
 		itemizedoverlay1 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.buildings));
 		itemizedoverlay2 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.sports));
+		itemizedoverlay3 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.foundation));
+		itemizedoverlay4 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.tree));
+		itemizedoverlay5 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.peoples));
 		
 		createMarker();
 		
+	}
+
+	public void createMarker() {
+		setTypedOverlays(1); 
+		if (itemizedoverlay1.size() > 0) {
+			mapView.getOverlays().add(itemizedoverlay1);
+		}
+		
+		setTypedOverlays(2);
+		if(itemizedoverlay2.size() > 0) {
+			mapView.getOverlays().add(itemizedoverlay2);
+		}
+		
+		setTypedOverlays(3);
+		if(itemizedoverlay3.size() > 0) {
+			mapView.getOverlays().add(itemizedoverlay3);
+		}
+		
+		setTypedOverlays(4);
+		if(itemizedoverlay4.size() > 0) {
+			mapView.getOverlays().add(itemizedoverlay4);
+		}
+		
+		setTypedOverlays(5);
+		if(itemizedoverlay5.size() > 0) {
+			mapView.getOverlays().add(itemizedoverlay5);
+		}
 	}
 	
 	public class GeoUpdateHandler implements LocationListener {
@@ -86,19 +116,6 @@ public class MapaDaUSP extends ActionBarActivity {
 		}
 	}
 	
-	public void createMarker() {
-		//! add institutes overlays
-		setTypedOverlays(1); 
-		if (itemizedoverlay1.size() > 0) {
-			mapView.getOverlays().add(itemizedoverlay1);
-		}
-		
-		setTypedOverlays(2);
-		if(itemizedoverlay2.size() > 0) {
-			mapView.getOverlays().add(itemizedoverlay2);
-		}
-		
-	}
 
 
 	private void setTypedOverlays(int type) {
@@ -109,6 +126,7 @@ public class MapaDaUSP extends ActionBarActivity {
 			InputStream is = getAssets().open("geopoints.csv");	
 			BufferedReader bis = new BufferedReader(new InputStreamReader(is));
 			String line = null;
+			
 			while((line = bis.readLine()) != null) {				
 				if(line.contains(";")) {
 					String [] fields = line.split(";");
@@ -152,6 +170,18 @@ public class MapaDaUSP extends ActionBarActivity {
 			case 2:
 				itemizedoverlay2.addOverlay(overlay);
 				break;
+				
+			case 3:
+				itemizedoverlay3.addOverlay(overlay);
+				break;
+				
+			case 4:
+				itemizedoverlay4.addOverlay(overlay);
+				break;
+				
+			case 5:
+				itemizedoverlay5.addOverlay(overlay);
+				break;
 
 			default:
 				break;
@@ -182,17 +212,56 @@ public class MapaDaUSP extends ActionBarActivity {
 		return false;
 	}
 	
+
+	private void disableGPS() {
+		myLocationOverlay.disableCompass(); 
+		myLocationOverlay.disableMyLocation();
+	}
+
+	private void enableGPS() {
+		myLocationOverlay.enableCompass(); 
+		myLocationOverlay.enableMyLocation();
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
-		myLocationOverlay.enableCompass(); 
-		myLocationOverlay.enableMyLocation(); 
+		enableGPS();
 	}
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
-		myLocationOverlay.disableCompass(); 
-		myLocationOverlay.disableMyLocation(); 
+		disableGPS(); 
+	}
+
+	@Override
+	protected void onDestroy () {
+		super.onDestroy ();
+		disableGPS();
+	}
+
+	@Override
+	protected void onRestart () {
+		super.onRestart ();
+		enableGPS();
+	}
+
+	@Override
+	protected void onStart () {
+		super.onStart ();
+		enableGPS();
+	}
+
+	@Override
+	protected void onStop () {
+		super.onStop ();
+		disableGPS();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		disableGPS();
+		super.onBackPressed();
 	}
 }

@@ -1,19 +1,3 @@
-/*
- * Copyright 2011 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package br.usp.ime.mapa;
 
 import android.content.ComponentName;
@@ -27,12 +11,6 @@ import android.view.SubMenu;
 
 import java.util.ArrayList;
 
-/**
- * A <em>really</em> dumb implementation of the {@link android.view.Menu} interface, that's only
- * useful for our actionbar-compat purposes. See
- * <code>com.android.internal.view.menu.MenuBuilder</code> in AOSP for a more complete
- * implementation.
- */
 public class SimpleMenu implements Menu {
 
     private Context mContext;
@@ -70,9 +48,6 @@ public class SimpleMenu implements Menu {
         return addInternal(itemId, order, mResources.getString(titleRes));
     }
 
-    /**
-     * Adds an item to the menu.  The other add methods funnel to this.
-     */
     private MenuItem addInternal(int itemId, int order, CharSequence title) {
         final SimpleMenuItem item = new SimpleMenuItem(this, itemId, order, title);
         mItems.add(findInsertIndex(mItems, order), item);
