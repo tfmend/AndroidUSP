@@ -4,12 +4,23 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +35,17 @@ import com.google.android.maps.OverlayItem;
 
 public class MapaDaUSP extends ActionBarActivity {
 
+	private static final double [][] _8022 = {
+		{-23.572051, -46.708429},/*
+		{-23.57211 , -46.709191},
+		{-23.571943, -46.70961 },
+		{-23.567773, -46.708032},*/
+		{-23.566593, -46.709374}
+	};
+
+
+	//private static final GeoPoint [] _8012;
+
 	private MapView mapView;
 	private LocationManager locationManager;
 	private MyLocationOverlay myLocationOverlay;
@@ -33,20 +55,20 @@ public class MapaDaUSP extends ActionBarActivity {
 	private MyOverlays itemizedoverlay3;
 	private MyOverlays itemizedoverlay4;
 	private MyOverlays itemizedoverlay5;
-	/*private MyOverlays itemizedoverlay6;*/
+	/*private MyOverlays itemizedoverlay6;  //*/
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-		 
+
+
 		mapView = (MapView) findViewById(R.id.mapView); // Get mapView
 		mapView.setBuiltInZoomControls(true); // Set to appears zoom controls
 		mapView.setSatellite(false);
-		
+
 		mapController = mapView.getController(); // Get map controller
 		mapController.setZoom(18); // Set initial zoom
-		
+
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); // Get location manager
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new GeoUpdateHandler()); // Set the lisneter
 
@@ -65,9 +87,84 @@ public class MapaDaUSP extends ActionBarActivity {
 		itemizedoverlay3 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.foundation));
 		itemizedoverlay4 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.tree));
 		itemizedoverlay5 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.peoples));
-		
+
 		createMarker();
-		
+
+		draw8022BusRoute(_8022, R.color.route8022);
+	}
+
+	private void draw8022BusRoute(double [][] geoPoints, int color) {
+		for (int i = 0; i < geoPoints.length-1; i++) {
+			drawPath(new GeoPoint((int) (geoPoints[i][0]   * 1e6), (int) (geoPoints[i][1]   * 1e6)), 
+					new GeoPoint((int) (geoPoints[i+1][0] * 1e6), (int) (geoPoints[i+1][1] * 1e6)), 
+					color, mapView);
+		}
+	}
+
+	private void drawPath(GeoPoint src, GeoPoint dest, int color,
+			MapView mMapView01) {
+
+		StringBuilder urlString = new StringBuilder();
+		getMapsURL(src, dest, urlString);
+
+		Document doc = null;
+		HttpURLConnection urlConnection = null;
+		URL url = null;
+		try {
+			url = new URL(urlString.toString());
+			urlConnection = (HttpURLConnection) url.openConnection();
+			urlConnection.setRequestMethod("GET");
+			urlConnection.setDoOutput(true);
+			urlConnection.setDoInput(true);
+			urlConnection.connect();
+
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			doc = db.parse(urlConnection.getInputStream());
+
+			if (doc.getElementsByTagName("GeometryCollection").getLength() > 0) {
+				String path = doc.getElementsByTagName("GeometryCollection")
+						.item(0).getFirstChild().getFirstChild()
+						.getFirstChild().getNodeValue();
+
+				String[] pairs = path.split(" ");
+
+				for (int i = 0; i < pairs.length-1; i++) {
+					String [] sourcePoint = pairs[i].split(",");
+					String [] sinkPoint   = pairs[i+1].split(",");
+					
+					mMapView01.getOverlays().add(new BusRouteOverlay(
+							new GeoPoint(
+									(int) (Double.parseDouble(sourcePoint[1]) * 1E6),
+									(int) (Double.parseDouble(sourcePoint[0]) * 1E6)), 
+							new GeoPoint(
+									(int) (Double.parseDouble(sinkPoint[1]) * 1E6),
+									(int) (Double.parseDouble(sinkPoint[0]) * 1E6)), 
+							R.color.route8022));
+
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private void getMapsURL(GeoPoint src, GeoPoint dest, StringBuilder urlString) {
+		urlString.append("http://maps.google.com/maps?f=d&hl=en");
+		urlString.append("&saddr=");// from
+		urlString.append(Double.toString((double) src.getLatitudeE6() / 1.0E6));
+		urlString.append(",");
+		urlString
+		.append(Double.toString((double) src.getLongitudeE6() / 1.0E6));
+		urlString.append("&daddr=");// to
+		urlString
+		.append(Double.toString((double) dest.getLatitudeE6() / 1.0E6));
+		urlString.append(",");
+		urlString.append(Double
+				.toString((double) dest.getLongitudeE6() / 1.0E6));
+		urlString.append("&ie=UTF8&0&om=0&output=kml");
 	}
 
 	public void createMarker() {
@@ -75,28 +172,28 @@ public class MapaDaUSP extends ActionBarActivity {
 		if (itemizedoverlay1.size() > 0) {
 			mapView.getOverlays().add(itemizedoverlay1);
 		}
-		
+
 		setTypedOverlays(2);
 		if(itemizedoverlay2.size() > 0) {
 			mapView.getOverlays().add(itemizedoverlay2);
 		}
-		
+
 		setTypedOverlays(3);
 		if(itemizedoverlay3.size() > 0) {
 			mapView.getOverlays().add(itemizedoverlay3);
 		}
-		
+
 		setTypedOverlays(4);
 		if(itemizedoverlay4.size() > 0) {
 			mapView.getOverlays().add(itemizedoverlay4);
 		}
-		
+
 		setTypedOverlays(5);
 		if(itemizedoverlay5.size() > 0) {
 			mapView.getOverlays().add(itemizedoverlay5);
 		}
 	}
-	
+
 	public class GeoUpdateHandler implements LocationListener {
 
 		@Override
@@ -115,18 +212,18 @@ public class MapaDaUSP extends ActionBarActivity {
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 		}
 	}
-	
+
 
 
 	private void setTypedOverlays(int type) {
 		if(type < 1 || type > 6)
 			return;
-		
+
 		try {
 			InputStream is = getAssets().open("geopoints.csv");	
 			BufferedReader bis = new BufferedReader(new InputStreamReader(is));
 			String line = null;
-			
+
 			while((line = bis.readLine()) != null) {				
 				if(line.contains(";")) {
 					String [] fields = line.split(";");
@@ -137,7 +234,7 @@ public class MapaDaUSP extends ActionBarActivity {
 						String abbr = fields[3];
 						float lat = Float.parseFloat(fields[4]);
 						float lon = Float.parseFloat(fields[5]);
-					
+
 						if(t == type) {
 							GeoPoint p = new GeoPoint( (int) (lat * 1E6), (int) (lon * 1E6) );
 							addOverlay(description, abbr, p, type);
@@ -146,7 +243,7 @@ public class MapaDaUSP extends ActionBarActivity {
 				}
 			}
 
-			
+
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -161,32 +258,32 @@ public class MapaDaUSP extends ActionBarActivity {
 		}
 		else
 			overlay = new OverlayItem(p, abbr, description);
-		
-		switch (type) {
-			case 1:
-				itemizedoverlay1.addOverlay(overlay);
-				break;
-			
-			case 2:
-				itemizedoverlay2.addOverlay(overlay);
-				break;
-				
-			case 3:
-				itemizedoverlay3.addOverlay(overlay);
-				break;
-				
-			case 4:
-				itemizedoverlay4.addOverlay(overlay);
-				break;
-				
-			case 5:
-				itemizedoverlay5.addOverlay(overlay);
-				break;
 
-			default:
-				break;
+		switch (type) {
+		case 1:
+			itemizedoverlay1.addOverlay(overlay);
+			break;
+
+		case 2:
+			itemizedoverlay2.addOverlay(overlay);
+			break;
+
+		case 3:
+			itemizedoverlay3.addOverlay(overlay);
+			break;
+
+		case 4:
+			itemizedoverlay4.addOverlay(overlay);
+			break;
+
+		case 5:
+			itemizedoverlay5.addOverlay(overlay);
+			break;
+
+		default:
+			break;
 		}
-		
+
 	}
 
 
@@ -211,7 +308,7 @@ public class MapaDaUSP extends ActionBarActivity {
 	protected boolean isRouteDisplayed() {
 		return false;
 	}
-	
+
 
 	private void disableGPS() {
 		myLocationOverlay.disableCompass(); 
@@ -228,7 +325,7 @@ public class MapaDaUSP extends ActionBarActivity {
 		super.onResume();
 		enableGPS();
 	}
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -258,7 +355,7 @@ public class MapaDaUSP extends ActionBarActivity {
 		super.onStop ();
 		disableGPS();
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		disableGPS();

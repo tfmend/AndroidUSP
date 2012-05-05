@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="fill_horizontal|fill_vertical"
+    android:orientation="vertical"
+    android:padding="4dip" >
+
+    <Button
+        android:id="@+id/test_get_status_button"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_weight="1"
+        android:onClick="onButtonClicked"
+        android:text="Test Get Status" />
+
+    <Button
+        android:id="@+id/test_ru_recommender_button"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_weight="1"
+        android:onClick="onButtonClicked"
+        android:text="Test RU recommender" />
+
+    <Button
+        android:id="@+id/test_time_recommender_button"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_weight="1"
+        android:onClick="onButtonClicked"
+        android:text="Test Time recommender" />
+
+    <Button
+        android:id="@+id/test_comment_sender_button"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_weight="1"
+        android:onClick="onButtonClicked"
+        android:text="Test comment sender" />
+
+    <Button
+        android:id="@+id/test_config_button"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_weight="1"
+        android:onClick="onButtonClicked"
+        android:text="Test Config" />
+
+</LinearLayout>

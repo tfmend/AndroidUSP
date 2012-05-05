@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <item android:id="@+id/item_menu_status" 
+        android:title="@string/title_ru_status"
+        android:icon="@drawable/collections_sort_by_size"/>
+    
+    <item android:id="@+id/item_menu_update" 
+        android:title="@string/title_update"
+        android:icon="@drawable/navigation_refresh"/>
+    
+    <item android:id="@+id/item_menu_better_ru" 
+        android:title="@string/title_better_ru"
+        android:icon="@drawable/location_place"/>
+    
+    <item android:id="@+id/item_menu_send_comment" 
+        android:title="@string/title_send_comment"
+        android:icon="@drawable/social_add_person"/>
+    
+    <item android:id="@+id/item_menu_time_recommender" 
+        android:title="@string/title_better_time"
+        android:icon="@drawable/device_access_alarms"/>
+    
+    <item android:id="@+id/item_menu_comments_view" 
+        android:title="@string/title_comments_view"/>
+    
+    <item android:id="@+id/item_menu_configurations" 
+        android:title="@string/title_configurations"
+        android:icon="@drawable/action_settings"/>
+
+</menu>

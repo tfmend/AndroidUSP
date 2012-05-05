@@ -1,0 +1,35 @@
+package br.usp.ime.rusp.core;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+public class RUConnectionFactory {
+
+	
+	public static RUConnection getConnection(Context context) {
+		
+	
+		if (isOnline(context)) {
+			return OnlineRUConnection.getInstance(context);
+		}
+		else {
+			return OfflineRUConnection.getInstance(context);
+		}
+		
+	}
+	
+	public static synchronized boolean isOnline(Context context) {
+
+		ConnectivityManager cm = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+			return true;
+		}
+
+		return false;
+
+	}
+	
+}
