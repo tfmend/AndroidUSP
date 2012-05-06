@@ -1,11 +1,8 @@
 package br.usp.ime.mapa;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.RectF;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -14,35 +11,39 @@ import com.google.android.maps.Projection;
 
 public class BusRouteOverlay extends Overlay {
 
-	private GeoPoint gp1;
-	private GeoPoint gp2;
-	private int defaultColor;
+	private GeoPoint source;
+	private GeoPoint sink;
+	private int color;
 
-	public BusRouteOverlay(GeoPoint gp1,GeoPoint gp2, int defaultColor) { 
-		this.gp1 = gp1; 
-		this.gp2 = gp2;
-		this.defaultColor  = defaultColor;
+	public BusRouteOverlay(GeoPoint source, GeoPoint sink, int color) { 
+		this.source = source; 
+		this.sink = sink;
+		this.color = color;
 	} 
 
-	
 	@Override 
 	public void draw (Canvas canvas, MapView mapView, boolean shadow) { 
+		
 		Projection projection = mapView.getProjection(); 
-
+		
 		Paint paint = new Paint(); 
-		paint.setAntiAlias(true); 
-
-		Point point = new Point(); 
-		projection.toPixels(gp1, point);
-
-		paint.setColor(defaultColor);   
-
-		Point point2 = new Point(); 
-		projection.toPixels(gp2, point2);
-		paint.setStrokeWidth(5);
+		paint.setAntiAlias(true);
+		
+		Point sourcePoint = new Point(); 
+		projection.toPixels(source, sourcePoint);
+				
+		if(color == 8012)  
+			paint.setARGB(127, 255, 0, 0);
+		else if(color == 8022)
+			paint.setARGB(127, 0, 0, 255);
+		
+		Point sinkPoint = new Point(); 
+		projection.toPixels(sink, sinkPoint);
+		
+		paint.setStrokeWidth(3);
 		paint.setAlpha(120);       
-		canvas.drawLine(point.x, point.y, point2.x,point2.y, paint);       
+		canvas.drawLine(sourcePoint.x, sourcePoint.y, sinkPoint.x,sinkPoint.y, paint);       
 
-		super.draw(canvas, mapView, false); 
+		super.draw(canvas, mapView, true); 
 	}
 }

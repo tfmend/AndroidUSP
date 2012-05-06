@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="br.usp.ime.mapa.MapaDaUSP">
+        <activity android:name="br.usp.ime.mapa.MapaDaUSP" android:label="@string/app_name">
             
         </activity>
         

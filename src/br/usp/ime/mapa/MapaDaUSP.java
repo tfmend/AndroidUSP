@@ -4,23 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,17 +25,6 @@ import com.google.android.maps.OverlayItem;
 
 
 public class MapaDaUSP extends ActionBarActivity {
-
-	private static final double [][] _8022 = {
-		{-23.572051, -46.708429},/*
-		{-23.57211 , -46.709191},
-		{-23.571943, -46.70961 },
-		{-23.567773, -46.708032},*/
-		{-23.566593, -46.709374}
-	};
-
-
-	//private static final GeoPoint [] _8012;
 
 	private MapView mapView;
 	private LocationManager locationManager;
@@ -60,7 +40,7 @@ public class MapaDaUSP extends ActionBarActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		this.setTitle("Mapa da USP");
 
 		mapView = (MapView) findViewById(R.id.mapView); // Get mapView
 		mapView.setBuiltInZoomControls(true); // Set to appears zoom controls
@@ -90,81 +70,67 @@ public class MapaDaUSP extends ActionBarActivity {
 
 		createMarker();
 
-		draw8022BusRoute(_8022, R.color.route8022);
+		drawBusRoute(getGeoPoints("8022.txt"), 8022);
+		drawBusRoute(getGeoPoints("8012.txt"), 8012);
 	}
 
-	private void draw8022BusRoute(double [][] geoPoints, int color) {
-		for (int i = 0; i < geoPoints.length-1; i++) {
-			drawPath(new GeoPoint((int) (geoPoints[i][0]   * 1e6), (int) (geoPoints[i][1]   * 1e6)), 
-					new GeoPoint((int) (geoPoints[i+1][0] * 1e6), (int) (geoPoints[i+1][1] * 1e6)), 
-					color, mapView);
+	private void drawBusRoute(String[] geoPoints, int color) {
+		for(int i = 0; i < geoPoints.length; i++) {
+			drawPath(color, mapView, geoPoints[i]);
 		}
 	}
 
-	private void drawPath(GeoPoint src, GeoPoint dest, int color,
-			MapView mMapView01) {
+	private String [] getGeoPoints(String string) {
 
-		StringBuilder urlString = new StringBuilder();
-		getMapsURL(src, dest, urlString);
+		List<String> stringList = new ArrayList<String>();
 
-		Document doc = null;
-		HttpURLConnection urlConnection = null;
-		URL url = null;
 		try {
-			url = new URL(urlString.toString());
-			urlConnection = (HttpURLConnection) url.openConnection();
-			urlConnection.setRequestMethod("GET");
-			urlConnection.setDoOutput(true);
-			urlConnection.setDoInput(true);
-			urlConnection.connect();
+			InputStream is = getAssets().open(string);	
+			BufferedReader bis = new BufferedReader(new InputStreamReader(is));
+			String line = null;
 
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			doc = db.parse(urlConnection.getInputStream());
+			while((line = bis.readLine()) != null) {				
+				stringList.add(line);
+			}
 
-			if (doc.getElementsByTagName("GeometryCollection").getLength() > 0) {
-				String path = doc.getElementsByTagName("GeometryCollection")
-						.item(0).getFirstChild().getFirstChild()
-						.getFirstChild().getNodeValue();
+			int n = stringList.size();
 
-				String[] pairs = path.split(" ");
+			String [] ret = new String[n];
 
-				for (int i = 0; i < pairs.length-1; i++) {
-					String [] sourcePoint = pairs[i].split(",");
-					String [] sinkPoint   = pairs[i+1].split(",");
-					
-					mMapView01.getOverlays().add(new BusRouteOverlay(
-							new GeoPoint(
-									(int) (Double.parseDouble(sourcePoint[1]) * 1E6),
-									(int) (Double.parseDouble(sourcePoint[0]) * 1E6)), 
+			for(int i = 0; i < n; i++)
+				ret[i] = stringList.get(i);
+
+			return ret;
+
+
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	private void drawPath(int color, MapView mMapView01, String nextPath) {
+		String[] pairs = nextPath.split(" ");
+
+		System.out.println(nextPath);				
+
+		for (int i = 0; i < pairs.length-1; i++) {
+			String [] sourcePoint = pairs[i].split(",");
+			String [] sinkPoint   = pairs[i+1].split(",");
+
+			System.out.println();
+
+			mMapView01.getOverlays().add(new BusRouteOverlay(
+					new GeoPoint(
+							(int) (Double.parseDouble(sourcePoint[1]) * 1E6),
+							(int) (Double.parseDouble(sourcePoint[0]) * 1E6)), 
 							new GeoPoint(
 									(int) (Double.parseDouble(sinkPoint[1]) * 1E6),
 									(int) (Double.parseDouble(sinkPoint[0]) * 1E6)), 
-							R.color.route8022));
+									color));
 
-				}
-
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
-	}
-
-	private void getMapsURL(GeoPoint src, GeoPoint dest, StringBuilder urlString) {
-		urlString.append("http://maps.google.com/maps?f=d&hl=en");
-		urlString.append("&saddr=");// from
-		urlString.append(Double.toString((double) src.getLatitudeE6() / 1.0E6));
-		urlString.append(",");
-		urlString
-		.append(Double.toString((double) src.getLongitudeE6() / 1.0E6));
-		urlString.append("&daddr=");// to
-		urlString
-		.append(Double.toString((double) dest.getLatitudeE6() / 1.0E6));
-		urlString.append(",");
-		urlString.append(Double
-				.toString((double) dest.getLongitudeE6() / 1.0E6));
-		urlString.append("&ie=UTF8&0&om=0&output=kml");
 	}
 
 	public void createMarker() {
