@@ -10,7 +10,7 @@ import android.graphics.drawable.Drawable;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
 
-public class MyOverlays extends ItemizedOverlay<OverlayItem> {
+public class LocationOverlay extends ItemizedOverlay<OverlayItem> {
 
 	private static int maxNum = 100;
 	private OverlayItem overlays[] = new OverlayItem[maxNum];
@@ -19,7 +19,7 @@ public class MyOverlays extends ItemizedOverlay<OverlayItem> {
 	private Context context;
 	private OverlayItem previousoverlay;
 
-	public MyOverlays(Context context, Drawable defaultMarker) {
+	public LocationOverlay(Context context, Drawable defaultMarker) {
 		super(boundCenterBottom(defaultMarker));
 		this.context = context;
 	}

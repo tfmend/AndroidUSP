@@ -30,12 +30,12 @@ public class MapaDaUSP extends ActionBarActivity {
 	private LocationManager locationManager;
 	private MyLocationOverlay myLocationOverlay;
 	private MapController mapController;
-	private MyOverlays itemizedoverlay1;
-	private MyOverlays itemizedoverlay2;
-	private MyOverlays itemizedoverlay3;
-	private MyOverlays itemizedoverlay4;
-	private MyOverlays itemizedoverlay5;
-	private MyOverlays itemizedoverlay6; 
+	private LocationOverlay itemizedoverlay1;
+	private LocationOverlay itemizedoverlay2;
+	private LocationOverlay itemizedoverlay3;
+	private LocationOverlay itemizedoverlay4;
+	private LocationOverlay itemizedoverlay5;
+	private LocationOverlay itemizedoverlay6; 
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,7 +50,7 @@ public class MapaDaUSP extends ActionBarActivity {
 		mapController.setZoom(18); // Set initial zoom
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); // Get location manager
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new GeoUpdateHandler()); // Set the lisneter
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationUpdateHandler()); // Set the lisneter
 
 		myLocationOverlay = new MyLocationOverlay(this, mapView); // 
 		mapView.getOverlays().add(myLocationOverlay); // add overlay to my location
@@ -62,12 +62,12 @@ public class MapaDaUSP extends ActionBarActivity {
 			}
 		});
 
-		itemizedoverlay1 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.buildings));
-		itemizedoverlay2 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.sports));
-		itemizedoverlay3 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.foundation));
-		itemizedoverlay4 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.tree));
-		itemizedoverlay5 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.peoples));
-		itemizedoverlay6 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.restaurants));
+		itemizedoverlay1 = new LocationOverlay(this, this.getResources().getDrawable(R.drawable.buildings));
+		itemizedoverlay2 = new LocationOverlay(this, this.getResources().getDrawable(R.drawable.sports));
+		itemizedoverlay3 = new LocationOverlay(this, this.getResources().getDrawable(R.drawable.foundation));
+		itemizedoverlay4 = new LocationOverlay(this, this.getResources().getDrawable(R.drawable.tree));
+		itemizedoverlay5 = new LocationOverlay(this, this.getResources().getDrawable(R.drawable.peoples));
+		itemizedoverlay6 = new LocationOverlay(this, this.getResources().getDrawable(R.drawable.restaurants));
 
 		createMarker();
 
@@ -166,7 +166,7 @@ public class MapaDaUSP extends ActionBarActivity {
 		}
 	}
 
-	public class GeoUpdateHandler implements LocationListener {
+	public class LocationUpdateHandler implements LocationListener {
 
 		@Override
 		public void onLocationChanged(Location location) {
