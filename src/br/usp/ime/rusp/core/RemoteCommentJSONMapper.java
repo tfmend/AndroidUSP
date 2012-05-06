@@ -7,8 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.util.Log;
-import br.usp.ime.rusp.enumerations.QueueSize;
-import br.usp.ime.rusp.enumerations.RU;
+import br.usp.ime.rusp.enumerations.*;
 
 public class RemoteCommentJSONMapper implements JSONMapper<RemoteComment> {
 
@@ -29,8 +28,6 @@ public class RemoteCommentJSONMapper implements JSONMapper<RemoteComment> {
 			return comments;
 		}
 		JSONArray jsonArray = new JSONArray(json);
-		Log.i(OnlineRUConnection.class.getName(), "Number of entries online"
-				+ jsonArray.length());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 

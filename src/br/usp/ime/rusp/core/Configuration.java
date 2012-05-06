@@ -3,23 +3,15 @@ package br.usp.ime.rusp.core;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import android.content.Context;
 import android.util.Log;
+import br.usp.ime.rusp.enumerations.OnlineServices;
+import br.usp.ime.rusp.enumerations.*;
 
 public class Configuration {
 
 	private static Configuration INSTANCE = null;
-	
-	private static final String GET_STATUS = "status";
-	private static final String GET_COMMENTS = "bandejao/";
-	private static final String GET_RU_RECOMMENDATIONS = "rurecommender";
-	private static final String GET_TIME_RECOMMENDATIONS = "timerecommender";
-	private static final String SEND_COMMENT = "bandejao/";
-	
 	public static final String SERVER_ADDRESS = "SERVER_ADDRESS";
-	
-	private static final String SERVER_DATE_PATTERN = "ss-mm-HH-dd-MM-yy";
 	
 	public static synchronized Configuration getInstance(Context context) {
 		
@@ -39,7 +31,7 @@ public class Configuration {
 		
 		this.context = context;
 		this.configs = new HashMap<String, String>();
-		this.configs.put(SERVER_ADDRESS, "http://192.168.1.3:8084/usp-mobile/");
+		this.configs.put(SERVER_ADDRESS, "http://192.168.1.3:8084/");
 		
 	}
 	
@@ -80,23 +72,23 @@ public class Configuration {
 	}
 	
 	public String getURlStatus() {
-		return this.getConfigurationValue(SERVER_ADDRESS)+GET_STATUS;
+		return OnlineServices.GET_STATUS.getUrlService(this.getConfigurationValue(SERVER_ADDRESS));
 	}
 	
-	public String getURlGetComments() {
-		return this.getConfigurationValue(SERVER_ADDRESS)+GET_COMMENTS;
+	public String getURlGetComments(RU ru) {
+		return OnlineServices.GET_COMMENTS.getUrlService(this.getConfigurationValue(SERVER_ADDRESS))+ru.getName();
 	}
 	
-	public String getURlSendComments() {
-		return this.getConfigurationValue(SERVER_ADDRESS)+SEND_COMMENT;
+	public String getURlSendComments(RU ru) {
+		return OnlineServices.SEND_COMMENT.getUrlService(this.getConfigurationValue(SERVER_ADDRESS))+ru.getName();
 	}
 	
 	public String getURlTimeRecommendation() {
-		return this.getConfigurationValue(SERVER_ADDRESS)+GET_TIME_RECOMMENDATIONS;
+		return OnlineServices.GET_TIME_RECOMMENDATIONS.getUrlService(this.getConfigurationValue(SERVER_ADDRESS));
 	}
 	
 	public String getURlRURecommendation() {
-		return this.getConfigurationValue(SERVER_ADDRESS)+GET_RU_RECOMMENDATIONS;
+		return OnlineServices.GET_RU_RECOMMENDATIONS.getUrlService(this.getConfigurationValue(SERVER_ADDRESS));
 	}	
 	
 }

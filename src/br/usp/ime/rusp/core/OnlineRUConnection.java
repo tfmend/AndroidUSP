@@ -49,8 +49,10 @@ public class OnlineRUConnection implements RUConnection {
 	public void sendComment(RemoteComment comment,
 			CallBackListener callBackListener) throws Exception {
 
-		this.sendComment(configuration.getURlSendComments(), comment);
-
+		WebserviceClient client = new WebserviceClient();
+		String url = configuration.getURlSendComments(currentRU);
+		client.sendComment( url , comment);
+		
 	}
 
 	@Override
@@ -58,7 +60,8 @@ public class OnlineRUConnection implements RUConnection {
 			throws Exception {
 
 		JSONMapper<RemoteComment> mapper = new RemoteCommentJSONMapper();
-		this.writeToMapper(configuration.getURlGetComments()+currentRU.getName(), mapper);
+		WebserviceClient client = new WebserviceClient();
+		client.writeToMapper(configuration.getURlGetComments(currentRU), mapper);
 		return mapper.getObjects();
 
 	}
@@ -67,7 +70,8 @@ public class OnlineRUConnection implements RUConnection {
 	public List<RemoteRecommendation> getRURecommendations(
 			CallBackListener callBackListener) throws Exception {
 		JSONMapper<RemoteRecommendation> mapper = new RemoteRecommendationJSONMapper();
-		this.writeToMapper(configuration.getURlRURecommendation(), mapper);
+		WebserviceClient client = new WebserviceClient();
+		client.writeToMapper(configuration.getURlRURecommendation(), mapper);
 		List<RemoteRecommendation> result =  mapper.getObjects();
 		OfflineRUConnection.getInstance(context).rurecommendations = result;
 		return result;
@@ -77,80 +81,19 @@ public class OnlineRUConnection implements RUConnection {
 	public List<RemoteRecommendation> getTimeRecommendation(
 			CallBackListener callBackListener) throws Exception {
 		JSONMapper<RemoteRecommendation> mapper = new RemoteRecommendationJSONMapper();
-		this.writeToMapper(configuration.getURlTimeRecommendation(), mapper);
+		WebserviceClient client = new WebserviceClient();
+		client.writeToMapper(configuration.getURlTimeRecommendation(), mapper);
 		List<RemoteRecommendation> result =  mapper.getObjects();
 		OfflineRUConnection.getInstance(context).timerecommendations = result;
 		return result;
-	}
-
-	private void writeToMapper(String url, JSONMapper<?> mapper)
-			throws Exception {
-		String result = this.readWebService(url);
-		mapper.read(result);
-	}
-
-	private synchronized String readWebService(String serverAdress)
-			throws Exception {
-
-		StringBuilder builder = new StringBuilder();
-		HttpClient client = new DefaultHttpClient();
-		URI uri = URI.create(serverAdress);
-		HttpGet httpGet = new HttpGet(uri);
-
-		HttpResponse response = client.execute(httpGet);
-		StatusLine statusLine = response.getStatusLine();
-		int statusCode = statusLine.getStatusCode();
-		if (statusCode == 200) {
-			HttpEntity entity = response.getEntity();
-			InputStream content = entity.getContent();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					content));
-			String line;
-			while ((line = reader.readLine()) != null) {
-				builder.append(line);
-			}
-		} else {
-			Log.e(OnlineRUConnection.class.toString(),
-					"Failed to server connection");
-			throw new IllegalStateException("Failed to server connection");
-		}
-
-		return builder.toString();
-	}
-
-	private void sendComment(String serverAdress, RemoteComment comment)
-			throws Exception {
-
-		HttpClient client = new DefaultHttpClient();
-		URI uri = URI.create(serverAdress + comment.ru.getName());
-		HttpPost post = new HttpPost(uri);
-
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-		nameValuePairs.add(new BasicNameValuePair("comentario.texto",
-				comment.texto));
-		nameValuePairs.add(new BasicNameValuePair("comentario.fila",
-				comment.fila.getName()));
-
-		UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nameValuePairs);
-		// entity.setContentType("application/x-www-form-urlencoded");
-		post.setEntity(entity);
-
-		HttpResponse response = client.execute(post);
-		StatusLine statusLine = response.getStatusLine();
-		int statusCode = statusLine.getStatusCode();
-		if (statusCode != 200) {
-			Log.e(OnlineRUConnection.class.toString(),
-					"Falha ao enviar mensagem.");
-			throw new IllegalStateException("Falha ao enviar comentário.");
-		}
-
 	}
 
 	@Override
 	public List<RemoteRecommendation> getStatus(CallBackListener backListener)
 			throws Exception {
 		JSONMapper<RemoteRecommendation> mapper = new RemoteRecommendationJSONMapper();
-		this.writeToMapper(configuration.getURlStatus(), mapper);
+		WebserviceClient client = new WebserviceClient();
+		client.writeToMapper(configuration.getURlStatus(), mapper);
 		List<RemoteRecommendation> result =  mapper.getObjects();
 		OfflineRUConnection.getInstance(context).statusrecommendations = result;
 		return result;
