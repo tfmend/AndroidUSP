@@ -25,7 +25,7 @@
 51;1;Instituto de Química;IQ;-23.564617;-46.72608;
 52;1;Faculdade de Ciências Farmacêuticas;FCF;-23.563653;-46.725179;
 53;1;Faculdade de Filosofia, Letras e Ciências Humanas;FFLCH;-23.56261;-46.724789;
-57;1;Centro de Computação Eletrônica;CCE;-23.557319;-46.731919;diferencas...
+57;1;Centro de Computação Eletrônica;CCE;-23.557319;-46.731919;
 65;1;Biblioteca da ECA;;-23.558251;-46.727027;
 66;1;Editora da Universidade de São Paulo;EDUSP;-23.557516;-46.727338;
 67;1;Biblioteca da Escola Politécnica;;-23.557241;-46.730177;
@@ -60,8 +60,13 @@
 25;4;Praça dos Bancos;;-23.559999;-46.727367;
 58;4;Praça da Reitoria;;-23.561342;-46.720439;
 69;4;Praça Ramos de Azevedo;;-23.556995;-46.734383;
-70;4;Praça do oceanográfico;;-23.56025;-46.731647;
 9;5;Conjunto Residencial da USP;CRUSP;-23.559778;-46.721874;
 27;5;Barracão;ECA;-23.556075;-46.728454;
 28;5;Barracão;FMVZ;-23.556518;-46.728373;
 40;5;Hospital Universitário;HU;-23.564774;-46.740607;
+71;6;Restaurante Central;;-23.559709;-46.720423;
+72;6;Restaurante da Física;;-23.561037;-46.73405;
+73;6;Restaurante das Químicas;;-23.565452;-46.725639;
+74;6;Restaurante da COCESP;;-23.558893;-46.738096;
+75;6;Restaurante do Clube dos Professores;;-23.561627;-46.729964;
+70;4;Praça do Oceanográfico;;-23.56025;-46.731647;

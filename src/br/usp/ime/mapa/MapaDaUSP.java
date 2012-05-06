@@ -35,7 +35,7 @@ public class MapaDaUSP extends ActionBarActivity {
 	private MyOverlays itemizedoverlay3;
 	private MyOverlays itemizedoverlay4;
 	private MyOverlays itemizedoverlay5;
-	/*private MyOverlays itemizedoverlay6;  //*/
+	private MyOverlays itemizedoverlay6; 
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,6 +67,7 @@ public class MapaDaUSP extends ActionBarActivity {
 		itemizedoverlay3 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.foundation));
 		itemizedoverlay4 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.tree));
 		itemizedoverlay5 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.peoples));
+		itemizedoverlay6 = new MyOverlays(this, this.getResources().getDrawable(R.drawable.restaurants));
 
 		createMarker();
 
@@ -158,6 +159,11 @@ public class MapaDaUSP extends ActionBarActivity {
 		if(itemizedoverlay5.size() > 0) {
 			mapView.getOverlays().add(itemizedoverlay5);
 		}
+		
+		setTypedOverlays(6);
+		if(itemizedoverlay6.size() > 0) {
+			mapView.getOverlays().add(itemizedoverlay6);
+		}
 	}
 
 	public class GeoUpdateHandler implements LocationListener {
@@ -193,8 +199,7 @@ public class MapaDaUSP extends ActionBarActivity {
 			while((line = bis.readLine()) != null) {				
 				if(line.contains(";")) {
 					String [] fields = line.split(";");
-					if(fields.length >= 6) {
-						//String id = fields[0];
+					if(fields.length >= 5) {
 						int t = Integer.parseInt(fields[1]);
 						String description = fields[2];
 						String abbr = fields[3];
@@ -244,6 +249,10 @@ public class MapaDaUSP extends ActionBarActivity {
 
 		case 5:
 			itemizedoverlay5.addOverlay(overlay);
+			break;
+			
+		case 6:
+			itemizedoverlay6.addOverlay(overlay);
 			break;
 
 		default:
