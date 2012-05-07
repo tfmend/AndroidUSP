@@ -30,13 +30,14 @@ public class MapaDaUSP extends ActionBarActivity {
 	private LocationManager locationManager;
 	private MyLocationOverlay myLocationOverlay;
 	private MapController mapController;
+	
 	private LocationOverlay itemizedoverlay1;
 	private LocationOverlay itemizedoverlay2;
 	private LocationOverlay itemizedoverlay3;
 	private LocationOverlay itemizedoverlay4;
 	private LocationOverlay itemizedoverlay5;
 	private LocationOverlay itemizedoverlay6; 
-
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
@@ -75,13 +76,13 @@ public class MapaDaUSP extends ActionBarActivity {
 		drawBusRoute(getGeoPoints("8012.txt"), 8012);
 	}
 
-	private void drawBusRoute(String[] geoPoints, int color) {
+	public void drawBusRoute(String[] geoPoints, int color) {
 		for(int i = 0; i < geoPoints.length; i++) {
 			drawPath(color, mapView, geoPoints[i]);
 		}
 	}
 
-	private String [] getGeoPoints(String string) {
+	public String [] getGeoPoints(String string) {
 
 		List<String> stringList = new ArrayList<String>();
 
@@ -110,7 +111,7 @@ public class MapaDaUSP extends ActionBarActivity {
 
 	}
 
-	private void drawPath(int color, MapView mMapView01, String nextPath) {
+	public void drawPath(int color, MapView mMapView01, String nextPath) {
 		String[] pairs = nextPath.split(" ");
 
 		System.out.println(nextPath);				
@@ -118,8 +119,6 @@ public class MapaDaUSP extends ActionBarActivity {
 		for (int i = 0; i < pairs.length-1; i++) {
 			String [] sourcePoint = pairs[i].split(",");
 			String [] sinkPoint   = pairs[i+1].split(",");
-
-			System.out.println();
 
 			mMapView01.getOverlays().add(new BusRouteOverlay(
 					new GeoPoint(
@@ -159,7 +158,7 @@ public class MapaDaUSP extends ActionBarActivity {
 		if(itemizedoverlay5.size() > 0) {
 			mapView.getOverlays().add(itemizedoverlay5);
 		}
-		
+
 		setTypedOverlays(6);
 		if(itemizedoverlay6.size() > 0) {
 			mapView.getOverlays().add(itemizedoverlay6);
@@ -187,12 +186,12 @@ public class MapaDaUSP extends ActionBarActivity {
 
 
 
-	private void setTypedOverlays(int type) {
+	public void setTypedOverlays(int type) {
 		if(type < 1 || type > 6)
 			return;
 
 		try {
-			InputStream is = getAssets().open("geopoints.csv");	
+			InputStream is = getAssets().open("geopoints.txt");	
 			BufferedReader bis = new BufferedReader(new InputStreamReader(is));
 			String line = null;
 
@@ -221,7 +220,7 @@ public class MapaDaUSP extends ActionBarActivity {
 	}
 
 
-	private void addOverlay(String description, String abbr, GeoPoint p, int type) {
+	public void addOverlay(String description, String abbr, GeoPoint p, int type) {
 		OverlayItem overlay;
 
 		if(abbr.isEmpty()) {
@@ -250,7 +249,7 @@ public class MapaDaUSP extends ActionBarActivity {
 		case 5:
 			itemizedoverlay5.addOverlay(overlay);
 			break;
-			
+
 		case 6:
 			itemizedoverlay6.addOverlay(overlay);
 			break;
@@ -260,7 +259,6 @@ public class MapaDaUSP extends ActionBarActivity {
 		}
 
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -285,16 +283,24 @@ public class MapaDaUSP extends ActionBarActivity {
 	}
 
 
-	private void disableGPS() {
+	public void disableGPS() {
 		myLocationOverlay.disableCompass(); 
 		myLocationOverlay.disableMyLocation();
 	}
 
-	private void enableGPS() {
+	public void enableGPS() {
 		myLocationOverlay.enableCompass(); 
 		myLocationOverlay.enableMyLocation();
 	}
-
+	
+	public MyLocationOverlay getMyLocationOverlay() {
+		return myLocationOverlay;
+	}
+	
+	public LocationOverlay getItemizedoverlay5() {
+		return itemizedoverlay5;
+	}
+	
 	@Override
 	protected void onResume() {
 		super.onResume();

@@ -26,7 +26,6 @@ public class HomeActivity extends DashboardActivity  {
 		setContentView(R.layout.activity_home);
 		
 		this.setTitle(" Aplicações para USP");
-		//this.setTitleColor(R.color.actionbar_title_color);
 	}
 
 	protected void onDestroy () {
