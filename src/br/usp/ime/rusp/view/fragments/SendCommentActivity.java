@@ -9,6 +9,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import br.ime.usp.R;
 import br.usp.ime.rusp.core.CallBackListener;
+import br.usp.ime.rusp.core.RUConnectionFactory;
 import br.usp.ime.rusp.core.RemoteComment;
 import br.usp.ime.rusp.core.actions.SendCommentAction;
 import br.usp.ime.rusp.enumerations.QueueSize;
@@ -63,6 +64,9 @@ public class SendCommentActivity extends RUSPBasicActivity {
             	
             		SendCommentAction action = new SendCommentAction( SendCommentActivity.this , null, 
             					new LocalCallBack(SendCommentActivity.this) );
+            		RUConnectionFactory.getConnection(SendCommentActivity.this).setCurrentRU(
+            				SendCommentActivity.this.comment.ru);
+            		
                 	action.send(SendCommentActivity.this.comment);
             		
             	}
@@ -97,7 +101,8 @@ public class SendCommentActivity extends RUSPBasicActivity {
 		@Override
 		public void sucess() {
 			owner.editText.setText("");
-        	queueSpinner.setSelection(0);        	
+        	queueSpinner.setSelection(0);
+        	SendCommentActivity.this.finish();
 		}
 
 		@Override

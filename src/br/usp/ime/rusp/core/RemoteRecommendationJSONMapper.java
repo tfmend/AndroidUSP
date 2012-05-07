@@ -30,8 +30,6 @@ public class RemoteRecommendationJSONMapper implements
 		}
 
 		JSONArray jsonArray = new JSONArray(json);
-		Log.i(OnlineRUConnection.class.getName(), "Number of entries online"
-				+ jsonArray.length());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 
