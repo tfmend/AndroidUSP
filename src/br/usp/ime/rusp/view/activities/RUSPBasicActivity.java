@@ -46,23 +46,9 @@ public abstract class RUSPBasicActivity extends Activity {
 						.setMessage(
 								"O aplicativo utilizar� os dados em cache porque"
 										+ " n�o foi identificada a conex�o com a internet.")
-						.setNeutralButton("Ok",
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-
-										/* dispara daemon que verifica a conexao */
-										
-
-									}
-
-								}).show();
+						.setNeutralButton("Ok",null).show();
 
 			}
-
-			/* verifica se o facade foi criado caso contrario */
 
 		}
 

@@ -62,6 +62,13 @@ public class SendCommentActivity extends RUSPBasicActivity {
             	
             	if (SendCommentActivity.this.comment != null) {
             	
+            		if ( !RUConnectionFactory.isOnline(SendCommentActivity.this) ) {
+            			Toast.makeText(SendCommentActivity.this, 
+                				"Não é possível enviar comentários em modo offline!", 
+                				Toast.LENGTH_LONG);
+            			return;
+            		}
+            		
             		SendCommentAction action = new SendCommentAction( SendCommentActivity.this , null, 
             					new LocalCallBack(SendCommentActivity.this) );
             		RUConnectionFactory.getConnection(SendCommentActivity.this).setCurrentRU(
