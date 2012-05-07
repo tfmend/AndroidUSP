@@ -36,8 +36,8 @@ public class OfflineRUConnection implements RUConnection {
 	public void sendComment(RemoteComment comment,
 			CallBackListener callBackListener) throws Exception {
 		
-		OffLineDataHelper helper = OffLineDataHelper.getInstance(context);
-		helper.saveComment(comment);
+		// OffLineDataHelper helper = OffLineDataHelper.getInstance(context);
+		// helper.saveComment(comment);
 		
 	}
 
